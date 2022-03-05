@@ -1,0 +1,28 @@
+package expression.parser;
+
+/**
+ * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
+ */
+public class StringCharSource implements CharSource {
+    private final String string;
+    private int pos;
+
+    public StringCharSource(String string) {
+        this.string = string;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return pos < string.length();
+    }
+
+    @Override
+    public char next() {
+        return string.charAt(pos++);
+    }
+
+    @Override
+    public IllegalArgumentException error(String message) {
+        return new IllegalArgumentException(String.format("%d: %s", pos, message));
+    }
+}
